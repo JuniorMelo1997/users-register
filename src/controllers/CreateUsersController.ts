@@ -1,15 +1,18 @@
 import {Request, Response} from "express"
 import { prismaClient } from "../database/PrismaClient";
+import bcrypt from "bcrypt";
 
 export class CreateUsersController{
     async create(req:Request, res: Response){
-        const {name, email, password} = req.body;
+        let {name, email, password} = req.body;
 
         const userAlreadyExists = await prismaClient.users.findFirst({where:{
             email: email
         }});
 
-        if(!userAlreadyExists){    
+        if(!userAlreadyExists){   
+            password = await bcrypt.hash(password, 10);
+            
             const user = await prismaClient.users.create({data:{
                 name, email, password
             }});
