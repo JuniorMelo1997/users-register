@@ -20,9 +20,9 @@ const login = authenticateToken;
 
 routes.post("/create", createUsersController.create);
 routes.get("/users", login, getUsersListController.getusers);
-routes.get("/user/:id", getUserController.getUser);
-routes.put("/update", updateUserController.updateUser);
-routes.delete("/user", deleteUserController.deleteUser);
+routes.get("/user/:id", login, getUserController.getUser);
+routes.put("/update", login, updateUserController.updateUser);
+routes.delete("/user", login, deleteUserController.deleteUser);
 routes.get("/login", userLoginController.userLogin);
 
 export {routes};
