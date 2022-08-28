@@ -9,3 +9,4 @@ A users register and login system.
 [X] It needs to be possible to update a user's info
 [X] It needs to be possible to delete a user
 [X] It needs to be possible to login with email and password
+[ ] User can delete os update only his own account

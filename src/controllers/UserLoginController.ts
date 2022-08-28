@@ -34,6 +34,7 @@ export class UserLoginController{
         }
 
         const token = sign({
+            id: user.id,
             name: user.name
         }, String(secret), {
             subject: user.id,

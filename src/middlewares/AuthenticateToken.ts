@@ -10,9 +10,16 @@ function authenticateToken(req: Request, res: Response, next: NextFunction){
     if(!token){
         return res.status(401).json({message: "access denied"});
     }
+
+    function parseJwt(token: string) {
+        return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    }
     
     try {
         verify(token, secret);
+        const user = parseJwt(token);
+
+        res.locals.tokenId = user.id;
 
         next();
     } catch (error) {
