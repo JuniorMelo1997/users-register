@@ -1,6 +1,11 @@
 import {Request, Response} from "express";
 import bcrypt from "bcrypt";
 import { prismaClient } from "../database/PrismaClient";
+import {sign} from "jsonwebtoken";
+
+require('dotenv').config();
+
+const secret = process.env.SECRET;
 
 export class UserLoginController{
     async userLogin(req: Request, res: Response){
@@ -28,6 +33,13 @@ export class UserLoginController{
             return res.status(401).json({message: "email or password incorrect"});
         }
 
-        return res.status(200).json(user);
+        const token = sign({
+            name: user.name
+        }, String(secret), {
+            subject: user.id,
+            expiresIn: "1d"
+        });
+
+        return res.status(200).json(token);
     }
 }

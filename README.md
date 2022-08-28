@@ -8,4 +8,4 @@ A users register and login system.
 [X] It needs to be possible to get the name of a user using the id
 [X] It needs to be possible to update a user's info
 [X] It needs to be possible to delete a user
-[ ] It needs to be possible to login with email and password
+[X] It needs to be possible to login with email and password
